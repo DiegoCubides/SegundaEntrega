@@ -6,6 +6,42 @@ normalise <- function(x){
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 
+##regresion lineal para sensor infrarojo
+x <- wall.distance$INFRARED
+y <- wall.distance$`DISTANCE(cm)`
+b=cov(x,y)/var(x)
+a=mean(y)-b*mean(x)
+a+b*121
+
+
+##regresion lineal para sensor ultrasonico
+x <- wall.distance$ULTRASONIC
+y <- wall.distance$`DISTANCE(cm)`
+b=cov(x,y)/var(x)
+a=mean(y)-b*mean(x)
+a+b*125
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 head(wall.distance)
 
 wall.distance$`DISTANCE(cm)` <-
