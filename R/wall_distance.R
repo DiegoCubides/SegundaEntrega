@@ -6,6 +6,17 @@ normalise <- function(x){
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 
+head(wall.distance)
+
+wall.distance$`DISTANCE(cm)` <-
+  as.factor(wall.distance$`DISTANCE(cm)`)
+pairs(wall.distance[c("INFRARED","ULTRASONIC")]
+      ,pch=21,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance$`DISTANCE(cm)`)])
+
+prop.table(table(wall.distance$`DISTANCE(cm)`))
+
+
+
 ##regresion lineal para sensor infrarojo
 x <- wall.distance$INFRARED
 y <- wall.distance$`DISTANCE(cm)`
@@ -24,12 +35,5 @@ a+b*126
 
 
 
-head(wall.distance)
 
-wall.distance$`DISTANCE(cm)` <-
-  as.factor(wall.distance$`DISTANCE(cm)`)
 
-plot(wall.distance[1:2],pch =21
-     ,bg= c("red","green")[unclass(wall.distance$`DISTANCE(cm)`)])
-
-prop.table(table(wall.distance$`DISTANCE(cm)`))
