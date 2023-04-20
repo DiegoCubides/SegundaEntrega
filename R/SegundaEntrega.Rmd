@@ -42,3 +42,5 @@ Se programo un carro a control remoto vía bluetooth capaz de moverse a diferent
 ![App](app.png){width="465"}
 
 ![Carro](carro.png){withd="1%" width="350"}
+
+Usando la comunicación Serial entre el Arduino y el módulo bluetooth se pudieron captar los datos de los sensores en Excel, para poder comunicar Excel con el Arduino se usó el software PLZ-DAQ
