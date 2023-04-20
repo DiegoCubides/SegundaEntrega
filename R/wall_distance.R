@@ -24,24 +24,6 @@ a+b*126
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 head(wall.distance)
 
 wall.distance$`DISTANCE(cm)` <-
