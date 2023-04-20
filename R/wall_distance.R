@@ -15,7 +15,7 @@ pairs(wall.distance[c("INFRARED","ULTRASONIC")]
 
 prop.table(table(wall.distance$`DISTANCE(cm)`))
 
-
+#hola
 
 ##regresion lineal para sensor infrarojo
 x <- wall.distance$INFRARED
