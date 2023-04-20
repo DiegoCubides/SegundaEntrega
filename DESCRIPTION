@@ -1,11 +1,16 @@
 Package: SegundaEnrega
 Type: Package
-Title: What the Package Does (Title Case)
+Title: machine learning to predict distance and obstacle type from two sensors
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Authors@R:c(
+person("Diego","Cubides",email="juand.cubidesor@ecci.edu.co", role = c("aut","cre"))
+person("Larry","Castro",email="larrya.castror@ecci.edu.co", role = c("aut","cre"))
+person("Tomas","Mendez",Tomasf.mendeza@ecci.Edu.co", role = c("aut","cre"))
+person("","",email="@ecci.edu.co", role = c("aut","cre"))
+
+
+Maintainer: The package maintainer <juand.cubidesor@ecci,edu.cot>
+Description: this repository explains and shows how to obtain data from two sensors and how they can predict the distance and three types of obstacles (concave, convex, flat), the data collection was carried out by arduino and the data was saved in a .csv file to be treated in Rstudio.
+License: GNU GENERAL PUBLIC LICENSE
 Encoding: UTF-8
 LazyData: true
