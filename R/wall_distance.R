@@ -19,7 +19,7 @@ x <- wall.distance$ULTRASONIC
 y <- wall.distance$`DISTANCE(cm)`
 b=cov(x,y)/var(x)
 a=mean(y)-b*mean(x)
-a+b*125
+a+b*126
 
 
 
