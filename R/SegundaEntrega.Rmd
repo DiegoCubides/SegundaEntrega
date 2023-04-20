@@ -1,30 +1,44 @@
 ---
-title: "Segunda_entrega"
-author: "Diego Cubides"
+title: "Segunda entrega"
+author: "Diego Cubides,Larry castro, Tomas Mendez y Jersson avila"
 date: "`r Sys.Date()`"
 output: pdf_document
+fontSize: 12pt
+lang: es.MX
+toc: TRUE
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Introducción
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+El presente reporte está basado en la implementación de un aprendizaje de máquina para poder predecir tres tipos de obstáculos mediante el algoritmo de Knn y la distancia bajo un modelo lineal y otro multilíneal de dos sensores incorporados en un carro a control remoto. Este robot fue implementado en Arduino y una app móvil con el fin de obtener datos de un sensor infrarrojo y un ultrasónico a distancias y obstáculos diferentes.
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+## Materiales
 
-```{r cars}
-summary(cars)
-```
+-   Sensor ultrasónico US-016
+-   Sensor Infrarrojo 2Y0A21 F
+-   Modulo puente h l298n
+-   Carro a control remoto
+-   bluetooth hc-05
+-   Arduino UNO
 
-## Including Plots
+## Software
 
-You can also embed plots, for example:
+-   RStudio
+-   Arduino
+-   App inventor
+-   Excel
+-   PLX-DAQ
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+## Procedimiento
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# 1.1 adquisision de datos
+
+Se programo un carro a control remoto vía bluetooth capaz de moverse a diferentes velocidades y en cualquier dirección, este fue controlado con una app creada en app inventor la cual permitio controlar el movimiento del carro y enviar la acción para que envié el dato censado en ese momento.
+
+![App](app.png){width="465"}
+
+![Carro](carro.png){withd="1%" width="350"}
