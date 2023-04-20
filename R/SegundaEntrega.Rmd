@@ -72,3 +72,7 @@ Usando la comunicación Serial entre el Arduino y el módulo bluetooth se pudier
 </div>
 
 # 1.2 Modelo lineal y regresion multilineal
+```{r}
+
+```
+
