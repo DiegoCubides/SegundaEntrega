@@ -39,8 +39,36 @@ El presente reporte está basado en la implementación de un aprendizaje de máq
 
 Se programo un carro a control remoto vía bluetooth capaz de moverse a diferentes velocidades y en cualquier dirección, este fue controlado con una app creada en app inventor la cual permitio controlar el movimiento del carro y enviar la acción para que envié el dato censado en ese momento.
 
-![App](app.png){width="465"}
+<div>
 
-![Carro](carro.png){withd="1%" width="350"}
+<p style="text-align:center;">
+
+![App](app.png){width="472"}
+
+</p>
+
+</div>
+
+<div>
+
+<p style="text-align:center;">
+
+![Carro](carro.png){withd="1%" width="285"}
+
+</p>
+
+</div>
 
 Usando la comunicación Serial entre el Arduino y el módulo bluetooth se pudieron captar los datos de los sensores en Excel, para poder comunicar Excel con el Arduino se usó el software PLZ-DAQ
+
+<div>
+
+<p style="text-align:center;">
+
+![PLX-DAQ](plx.png){withd="1%" width="221"}
+
+</p>
+
+</div>
+
+# 1.2 Modelo lineal y regresion multilineal
