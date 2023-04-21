@@ -11,6 +11,7 @@ hist(type.wall.distance$INFRARED,breaks = 50)
 hist(type.wall.distance$ULTRASONIC,breaks = 50)
 
 type.wall.distance$TYPE <-as.factor(type.wall.distance$TYPE)
+datasetprueba$TYPE <- as.factor(datasetprueba$TYPE)
 
 prop.table(table(type.wall.distance$`DISTANCE(cm)`))
 
@@ -33,7 +34,7 @@ datasetprueba<- cbind(datasetprueba,newdata2)
 sample.index <- sample(1:nrow(type.wall.distance)
                        ,nrow(type.wall.distance)*0.7
                        ,replace = F)
-predictors <- c("INFRARED","ULTRASONIC","TYPECONCAVA","TYPECONVEXA","TYPEPLANA")
+predictors <- c("INFRARED","ULTRASONIC","TYPE.CONCAVA","TYPE.CONVEXA","TYPE.PLANA")
 
 
 train.data  <-  type.wall.distance[sample.index
@@ -44,7 +45,7 @@ test.data  <-  type.wall.distance[-sample.index
                                    ,drop=F]
 ##KNN
 ctrl <- trainControl(method = "cv",p=0.7) #variable de control
-Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPECONCAVA+TYPECONVEXA+TYPEPLANA
+Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPE.CONCAVA+TYPE.CONVEXA+TYPE.PLANA
                 ,data = train.data
                 ,method = "knn", trControl = ctrl
                 ,preProcess= c("range")
@@ -53,7 +54,7 @@ Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPECONCAVA+TYPECONVEXA+TYPEPLANA
 Knnpredict <- predict(Knnfit,newdata = datasetprueba)
 
 confusionMatrix(Knnpredict
-                ,prueba$TYPE)
+              ,datasetprueba$TYPE)
 library(pROC)
 kNN.roc <- roc(test.data$TYPE, as.numeric(as.character(Knnpredict)))
 
