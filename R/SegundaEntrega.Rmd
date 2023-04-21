@@ -242,4 +242,4 @@ de igual manera se ve la sensitividad y la especificidad son del 1.
 Knnpredict
 ```
 ##  Validacion de modelos
-
+Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos rango fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
