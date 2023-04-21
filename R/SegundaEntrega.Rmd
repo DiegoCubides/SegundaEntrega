@@ -19,7 +19,7 @@ wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 dataset <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
-
+##
 ```
 
 ## Introducción
@@ -303,7 +303,7 @@ a+b* 218
 ##reentrenamiento con un dataset de pruebas (data_pruebas)
 
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
-wall.distance <-read_csv(p aste0(folder,"/dataset_wall_distance.csv"))
+wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 data_prueba <- read_csv(paste0(folder,"/DATASET_PRUEBA_LINEAL.csv"))
 ```
