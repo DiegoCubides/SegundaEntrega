@@ -26,7 +26,7 @@ x <- wall.distance$INFRARED
 y <- wall.distance$`DISTANCE(cm)`
 b=cov(x,y)/var(x)
 a=mean(y)-b*mean(x)
-a+b*121## aca va el nuevo dataset
+a+b*121 ## aca va el nuevo dataset
 
 
 ##Linear Regression For Ultrasonic Sensor
