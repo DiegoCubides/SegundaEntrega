@@ -276,17 +276,10 @@ Knnpredict
 
 ## Validacion de modelos
 
-Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos rango fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
+Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos rango fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 65 a los 85 centimetros.
 
-=======
-##  Validacion de modelos
-Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos distancias fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
->>>>>>> 480113853995acc4017db175efc4118a6aaf1886
 ```{r}
-folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
-wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
-dataproof <- read_csv(paste0(folder,"/DATASET_PRUEBA_LINEAL.csv"))
-##Linear Regression For Infrared Sensor
+
 x <- wall.distance$INFRARED
 y <- wall.distance$`DISTANCE(cm)`
 b=cov(x,y)/var(x)
@@ -308,7 +301,7 @@ a+b* 240
 a+b* 261
 a+b* 276
 a+b* 291
-<<<<<<< HEAD
+
 ```
 
 Validacion de modelos
@@ -326,7 +319,7 @@ a+b\* 218 [1] 64.71935 \> a+b\* 240 [1] 71.38548 \> a+b\* 261 [1] 77.7486 \> a+b
 ## Reentrenamiento con un dataset de pruebas (data_pruebas)
 
 ```{r}
-=======
+
 
 ```
 Se evidencia en los resultados que en el sensor infrarojo fuera de rango pierde la exactitud y precision; y el sensor de ultasonido mantiene su exactitud y precision sin importar que esta por fuera del rango del modelo predictorio.
@@ -360,13 +353,12 @@ a+b* 218
 ```{r}
 ##reentrenamiento con un dataset de pruebas (data_pruebas)
 
->>>>>>> 480113853995acc4017db175efc4118a6aaf1886
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 data_prueba <- read_csv(paste0(folder,"/DATASET_PRUEBA_LINEAL.csv"))
 ```
-<<<<<<< HEAD
+
 
 ## Se hace un reentrenamiento
 

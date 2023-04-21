@@ -7,3 +7,10 @@
 \contentsline {section}{1.2 Modelo lineal y regresion multilineal}{3}{section*.7}%
 \contentsline {section}{2.1 Adquisición de datos}{9}{section*.8}%
 \contentsline {subsection}{Validacion de modelos}{15}{section*.9}%
+\contentsline {subsection}{Regresion lineal para el sensor Infrarojo, fuera del rango.}{16}{section*.10}%
+\contentsline {subsection}{Regresion lineal para el sensor de Ultrasonido, fuera del rango.}{16}{section*.11}%
+\contentsline {subsection}{Reentrenamiento con un dataset de pruebas (data\_pruebas)}{16}{section*.12}%
+\contentsline {subsection}{Se hace un reentrenamiento}{17}{section*.13}%
+\contentsline {subsection}{Resultados de prediccion datos y del dataset del 65 a 85 1 2 3 4 5 6 7 8 9 64.28071 70.82564 77.07798 81.54730 86.00092 66.43089 70.28756 75.94490 80.73429}{17}{section*.14}%
+\contentsline {section}{86.39164}{17}{section*.15}%
+\contentsline {subsection}{se hace un rentrenamiento}{17}{section*.16}%
