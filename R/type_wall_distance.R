@@ -2,6 +2,8 @@ library(tidyverse)
 library(caret)
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
+
+
 datasetprueba <-read_csv(paste0(folder,"/type_wall_distance_prueba.csv"))
 #Exploratory Data Analysis
 head(type.wall.distance)
@@ -9,6 +11,7 @@ hist(type.wall.distance$INFRARED,breaks = 50)
 hist(type.wall.distance$ULTRASONIC,breaks = 50)
 
 type.wall.distance$TYPE <-as.factor(type.wall.distance$TYPE)
+datasetprueba$TYPE <- as.factor(datasetprueba$TYPE)
 
 prop.table(table(type.wall.distance$`DISTANCE(cm)`))
 
@@ -20,10 +23,13 @@ pairs.panels(type.wall.distance[1:2]
 
 
 dummy <- dummyVars(" ~ TYPE",data = type.wall.distance)
+dummy2 <- dummyVars(" ~ TYPE",data = datasetprueba)
+
 
 newdata <- data.frame(predict(dummy,newdata = type.wall.distance))
-
 type.wall.distance <- cbind(type.wall.distance,newdata)
+newdata2 <- data.frame(predict(dummy2,newdata = datasetprueba))
+datasetprueba<- cbind(datasetprueba,newdata2)
 
 sample.index <- sample(1:nrow(type.wall.distance)
                        ,nrow(type.wall.distance)*0.7
@@ -45,10 +51,10 @@ Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPE.CONCAVA+TYPE.CONVEXA+TYPE.PLANA
                 ,preProcess= c("range")
                 ,tuneLength=20)
 
-Knnpredict <- predict(Knnfit,newdata = test.data)## aca va el nuevo dataset
+Knnpredict <- predict(Knnfit,newdata = datasetprueba)
 
 confusionMatrix(Knnpredict
-                ,test.data$TYPE)
+              ,datasetprueba$TYPE)
 library(pROC)
 kNN.roc <- roc(test.data$TYPE, as.numeric(as.character(Knnpredict)))
 
