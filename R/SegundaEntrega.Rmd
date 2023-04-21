@@ -10,6 +10,14 @@ toc: TRUE
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse) 
+library(knitr)
+library(psych)
+folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
+wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
+dataset <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
+wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
+type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
 ```
 
 ## Introducción
@@ -72,7 +80,82 @@ Usando la comunicación Serial entre el Arduino y el módulo bluetooth se pudier
 </div>
 
 # 1.2 Modelo lineal y regresion multilineal
+Luego de tener el dataset de los datos tomados se carga la libreria tidyverse y el dataset
+```{r, include=TRUE,echo=TRUE,eval=FALSE}
+library(tidyverse)
+folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
+wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
+
+
+```
+Se hace el analisis exploratorio de datos para el dataset 
+
+```{r include=TRUE, echo=TRUE, eval=TRUE, warning=FALSE}
+
+kable(summary(wall.distance))
+```
+De la tabla se puede identificar los valores maximos y minimos que se captaron con los sensores, de igual manera los valores por el primer quartil y el tercer cuartil
+```{r include=TRUE, echo=TRUE, eval=TRUE, warning=FALSE}
+hist(wall.distance$INFRARED,breaks = 10)
+hist(wall.distance$ULTRASONIC,breaks = 10)
+
+```
+Debido a que la variable predictora es la distancia se tiene que pasar como factor,Graficando cada dato del sensor con la función hist se puede ver que los datos están distribuidos y que son viables para hacer aprendizaje de maquina
+```{r include=TRUE, echo=TRUE, eval=TRUE, warning=FALSE}
+wall.distance$`DISTANCE(cm)` <-as.factor(wall.distance$`DISTANCE(cm)`)
+pairs(wall.distance[c("INFRARED","ULTRASONIC")]
+,pch=25
+,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance$`DISTANCE(cm)`)])
+
+```
+Cuando se captaron los datos se identificó que un sensor crece inversamente al otro, graficando todos los datos en función a la distancia se notó que tienen una buena distribución y que se logran identificar grupos en todos los datos
+```{r}
+pairs.panels(wall.distance[c("INFRARED","ULTRASONIC")]
+             ,pch=21,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance$`DISTANCE(cm)`)])
+```
+En esta grafica se ve mejor la relacion de las varibales y se ve que tiene una relacion negativa de -0.9, siendo esto un factor muy importante para poder hacer el aprendizaje de maquina 
+
+```{r}
+kable(prop.table(table(wall.distance$`DISTANCE(cm)`)))
+```
+de los 110 datos que se obtuvieron hay la misma cantidad en cada distancia identificada
+- regresion lineal para sensor infrarojo
 ```{r}
 
+x <- dataset$INFRARED
+y <- dataset$`DISTANCE(cm)`
+b=cov(x,y)/var(x)
+a=mean(y)-b*mean(x)
+a+b*121
+```
+- regresion lineal para sensor infrarojo
+
+#2.1 Adquisición de datos 
+Para el modelo multilineal se obtuvieron nuevas medidas y una nueva variable la cual es el tipo de obstaculo, de las 4 variables se obtuvieron 198 muestras.
+```{r}
+kable(head(type.wall.distance))
+```
+```{r}
+hist(type.wall.distance$INFRARED,breaks = 50)
+hist(type.wall.distance$ULTRASONIC,breaks = 50)
+```
+A diferencia del primer dataset, en este se obtuvieron valores por fuera del rango normal como lo muestra la grafica del sensor ultrasonico.
+```{r}
+kable(summary(type.wall.distance))
+```
+Con la funcion summary se puede ver una division de los datos tanto del infrarojo como el del ultrasonido y cuales fueron sus valores maximos y minimos.
+```{r}
+type.wall.distance$TYPE <-as.factor(type.wall.distance$TYPE)
+
+```
+Debido a que la variable predictora es el tipo de obstaculo se tiene que pasar como factor, de cada 
+```{r}
+plot(type.wall.distance[1:2]
+     ,main=c("yellow = plano,blue=concavo,green=convexo")
+     ,pch=21,bg=c("green","blue3","yellow")[unclass(type.wall.distance$TYPE)])
+library(psych)
+pairs.panels(type.wall.distance[1:2]
+             ,main=c("yellow = plano,blue=concavo,green=convexo")
+             ,pch=21,bg=c("green","blue3","yellow")[unclass(type.wall.distance$TYPE)])
 ```
 

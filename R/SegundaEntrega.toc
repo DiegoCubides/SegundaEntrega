@@ -1,0 +1,7 @@
+\babel@toc {nil}{}\relax 
+\contentsline {subsection}{Introducción}{1}{section*.2}%
+\contentsline {subsection}{Materiales}{1}{section*.3}%
+\contentsline {subsection}{Software}{1}{section*.4}%
+\contentsline {subsection}{Procedimiento}{1}{section*.5}%
+\contentsline {section}{1.1 adquisision de datos}{1}{section*.6}%
+\contentsline {section}{1.2 Modelo lineal y regresion multilineal}{3}{section*.7}%

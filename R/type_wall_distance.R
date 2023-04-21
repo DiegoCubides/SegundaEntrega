@@ -5,15 +5,19 @@ type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
 
 #Exploratory Data Analysis
 head(type.wall.distance)
+hist(type.wall.distance$INFRARED,breaks = 50)
+hist(type.wall.distance$ULTRASONIC,breaks = 50)
 
 type.wall.distance$TYPE <-as.factor(type.wall.distance$TYPE)
 
 prop.table(table(type.wall.distance$`DISTANCE(cm)`))
 
-plot(type.wall.distance[1:2],pch =21
-     ,bg= c("red","green")[unclass(type.wall.distance$TYPE)])
-hist(type.wall.distance$INFRARED,breaks = 50)
-hist(type.wall.distance$ULTRASONIC,breaks = 50)
+plot(type.wall.distance[1:2]
+     ,pch=21,bg=c("green","blue3","yellow")[unclass(type.wall.distance$TYPE)])
+library(psych)
+pairs.panels(type.wall.distance[1:2]
+             ,pch=21,bg=c("green","blue3","yellow")[unclass(type.wall.distance$TYPE)])
+
 
 dummy <- dummyVars(" ~ TYPE",data = type.wall.distance)
 
