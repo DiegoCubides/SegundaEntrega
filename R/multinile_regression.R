@@ -13,7 +13,7 @@ library(psych)
 pairs.panels(wall.distance2[c("INFRARED","ULTRASONIC")]
              ,pch=21,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance2$`DISTANCE(cm)`)])
 ##multilineal
-predictors <- c( "INFRARED", "ULTRASONIC")
+predictors <- c( "INFRARED","ULTRASONIC")
 sample.index <- sample(1:nrow(wall.distance)
                        ,nrow(wall.distance)*0.7
                        ,replace = F)
@@ -26,7 +26,7 @@ test.data  <-  wall.distance[-sample.index
 
 model<- lm(`DISTANCE(cm)` ~ INFRARED + ULTRASONIC,train.data)
 summary(model)
-predictions <- predict(model,test.data)## aca va el nuevo dataset
+predictions <- predict(model,test.data)
 
 RMSE.df <- data.frame(predicted = predictions
                       ,reales=test.data$`DISTANCE(cm)`

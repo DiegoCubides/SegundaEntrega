@@ -2,8 +2,6 @@ library(tidyverse)
 library(caret)
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
-
-
 datasetprueba <-read_csv(paste0(folder,"/type_wall_distance_prueba.csv"))
 #Exploratory Data Analysis
 head(type.wall.distance)
@@ -55,8 +53,6 @@ Knnpredict <- predict(Knnfit,newdata = datasetprueba)
 
 confusionMatrix(Knnpredict
               ,datasetprueba$TYPE)
-library(pROC)
-kNN.roc <- roc(test.data$TYPE, as.numeric(as.character(Knnpredict)))
 
 
 
