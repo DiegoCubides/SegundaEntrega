@@ -22,13 +22,13 @@ pairs.panels(type.wall.distance[1:2]
 
 
 dummy <- dummyVars(" ~ TYPE",data = type.wall.distance)
-dummy2 <- dummyVars(" ~ TYPE",data = prueba)
+dummy2 <- dummyVars(" ~ TYPE",data = datasetprueba)
 
 
 newdata <- data.frame(predict(dummy,newdata = type.wall.distance))
 type.wall.distance <- cbind(type.wall.distance,newdata)
-newdata2 <- data.frame(predict(dummy2,newdata = prueba))
-prueba<- cbind(prueba,newdata2)
+newdata2 <- data.frame(predict(dummy2,newdata = datasetprueba))
+datasetprueba<- cbind(datasetprueba,newdata2)
 
 sample.index <- sample(1:nrow(type.wall.distance)
                        ,nrow(type.wall.distance)*0.7
@@ -50,7 +50,7 @@ Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPECONCAVA+TYPECONVEXA+TYPEPLANA
                 ,preProcess= c("range")
                 ,tuneLength=20)
 
-Knnpredict <- predict(Knnfit,newdata = prueba)## aca va el nuevo dataset
+Knnpredict <- predict(Knnfit,newdata = datasetprueba)
 
 confusionMatrix(Knnpredict
                 ,prueba$TYPE)
