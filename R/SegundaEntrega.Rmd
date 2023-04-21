@@ -13,6 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse) 
 library(knitr)
 library(psych)
+library(caret)
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 dataset <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
@@ -158,4 +159,51 @@ pairs.panels(type.wall.distance[1:2]
              ,main=c("yellow = plano,blue=concavo,green=convexo")
              ,pch=21,bg=c("green","blue3","yellow")[unclass(type.wall.distance$TYPE)])
 ```
+En este dataset se cambio mucho la relacion entre las variables, se tiene una relacion del 0.03 que no es un buen indicio para aprendizaje de maquina pero aun asi se logran identificiar los tres grupos visualemente.
+```{r}
+dummy <- dummyVars(" ~ TYPE",data = type.wall.distance)
 
+newdata <- data.frame(predict(dummy,newdata = type.wall.distance))
+
+type.wall.distance <- cbind(type.wall.distance,newdata)
+kable(head(type.wall.distance))
+```
+Se hace one hot encoding para la varibale TYPE, se tienen nuevas variables dummy y estas seran usadas como varibales predictoras para el aprendizaje de maquina.
+```{r }
+
+sample.index <- sample(1:nrow(type.wall.distance)
+                       ,nrow(type.wall.distance)*0.7
+                       ,replace = F)
+predictors <- c("INFRARED","ULTRASONIC","TYPE.CONCAVA","TYPE.CONVEXA","TYPE.PLANA")
+
+
+train.data  <-  type.wall.distance[sample.index
+                                   ,c(predictors,"TYPE")
+                                   ,drop=F]
+test.data  <-  type.wall.distance[-sample.index
+                                   ,c(predictors,"TYPE")
+                                   ,drop=F]
+```
+para hacer el entrenamiento se hizo cross validation dividiendo el dataset en el 70% para entrenamiento y el 30% para prueba
+```{r}
+##KNN
+ctrl <- trainControl(method = "cv",p=0.7) #variable de control
+Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPE.CONCAVA+TYPE.CONVEXA+TYPE.PLANA
+                ,data = train.data
+                ,method = "knn", trControl = ctrl
+                ,preProcess= c("range")
+                ,tuneLength=20)
+
+Knnpredict <- predict(Knnfit,newdata = test.data)
+confusionMatrix(Knnpredict
+                ,test.data$TYPE)
+```
+Se entrena el algoritmo Knn en funcion de la variable TYPE y las variables predictoras son INFRARED,ULTRASONIC,TYPE.CONCAVA,TYPE.CONVEXA y TYPE.PLANA
+
+con la matriz de confusion 3x3 se mira que de las muestras de test.data el algoritmo predice todas correctamente, tambien el accuary es de 1 y el p-value es menor a 2.2e-16 siendo este un valor muy importante estadisticamente.
+
+de igual manera se ve la sensitividad y la especificidad son del 1.
+```{r}
+Knnpredict
+```
+## 2.2 Validacion de modelo
