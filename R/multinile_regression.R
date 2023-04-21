@@ -2,7 +2,7 @@ library(tidyverse)
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
-#analisis exploratorio de datos
+#analisis exploratorio de datos.
 summary(wall.distance2)
 hist(wall.distance2$INFRARED,breaks = 10)
 hist(wall.distance2$ULTRASONIC,breaks = 10)
