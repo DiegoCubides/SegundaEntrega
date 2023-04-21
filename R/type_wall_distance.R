@@ -45,7 +45,7 @@ Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPE.CONCAVA+TYPE.CONVEXA+TYPE.PLANA
                 ,preProcess= c("range")
                 ,tuneLength=20)
 
-Knnpredict <- predict(Knnfit,newdata = test.data)
+Knnpredict <- predict(Knnfit,newdata = test.data)## aca va el nuevo dataset
 
 confusionMatrix(Knnpredict
                 ,test.data$TYPE)

@@ -26,7 +26,7 @@ test.data  <-  wall.distance[-sample.index
 
 model<- lm(`DISTANCE(cm)` ~ INFRARED + ULTRASONIC,train.data)
 summary(model)
-predictions <- predict(model,test.data)
+predictions <- predict(model,test.data)## aca va el nuevo dataset
 
 RMSE.df <- data.frame(predicted = predictions
                       ,reales=test.data$`DISTANCE(cm)`
