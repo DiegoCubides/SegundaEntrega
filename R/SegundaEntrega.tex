@@ -386,19 +386,19 @@ datos con los que se va a entrenar son los del train.data
 ## 
 ## Residuals:
 ##      Min       1Q   Median       3Q      Max 
-## -1.47972 -0.27306  0.00346  0.33596  1.06131 
+## -1.53108 -0.34182  0.08374  0.37502  0.99661 
 ## 
 ## Coefficients:
 ##               Estimate Std. Error t value Pr(>|t|)    
-## (Intercept) -1.2015847  0.6222379  -1.931   0.0573 .  
-## INFRARED    -0.0006464  0.0014429  -0.448   0.6555    
-## ULTRASONIC   0.3034409  0.0028132 107.861   <2e-16 ***
+## (Intercept) -0.9491988  0.6349161  -1.495    0.139    
+## INFRARED    -0.0008764  0.0015039  -0.583    0.562    
+## ULTRASONIC   0.3013707  0.0027994 107.656   <2e-16 ***
 ## ---
 ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 ## 
-## Residual standard error: 0.5343 on 74 degrees of freedom
+## Residual standard error: 0.5626 on 74 degrees of freedom
 ## Multiple R-squared:  0.9988, Adjusted R-squared:  0.9988 
-## F-statistic: 3.197e+04 on 2 and 74 DF,  p-value: < 2.2e-16
+## F-statistic: 3.097e+04 on 2 and 74 DF,  p-value: < 2.2e-16
 \end{verbatim}
 
 \begin{Shaded}
@@ -410,15 +410,15 @@ datos con los que se va a entrenar son los del train.data
 
 \begin{verbatim}
 ##         1         2         3         4         5         6         7         8 
-## 18.954430 34.798643 40.274153 56.073119 20.175950 29.627219 62.140644  9.424300 
+## 25.378619 34.765806 40.208882 20.222015 35.067176 39.906635 61.932986  9.496138 
 ##         9        10        11        12        13        14        15        16 
-## 15.881883 19.862813 34.797996 45.439759 55.155039 16.193081 18.952491 25.360948 
+## 39.601759 53.783708 29.926347 49.872901 54.992697 25.381249 35.367671 44.735577 
 ##        17        18        19        20        21        22        23        24 
-## 35.404878 51.203844 60.624086 25.359655 49.996544 25.359655 54.553975  9.432704 
+## 51.066114 35.066300 59.523773 15.636604 29.324482 49.865890  9.507530 15.335233 
 ##        25        26        27        28        29        30        31        32 
-## 35.408757 55.463651 60.323877 20.478745 29.627219 55.158918 59.410969  9.736791 
+## 25.077249 39.906635 60.130020 15.947614 29.624977 39.300388 49.263148  9.809777 
 ##        33 
-## 35.102084
+## 15.937098
 \end{verbatim}
 
 Para el caso del modelo multilineal se logra identificar que la variable
@@ -442,12 +442,12 @@ cuadratico medio se hizo lo siguiente
 predicted & reales & RSE \\
 \midrule()
 \endhead
-18.95443 & 20 & 1.0455702 \\
-34.79864 & 35 & 0.2013572 \\
-40.27415 & 40 & 0.2741534 \\
-56.07312 & 55 & 1.0731188 \\
-20.17595 & 20 & 0.1759502 \\
-29.62722 & 30 & 0.3727805 \\
+25.37862 & 25 & 0.3786194 \\
+34.76581 & 35 & 0.2341943 \\
+40.20888 & 40 & 0.2088820 \\
+20.22202 & 20 & 0.2220155 \\
+35.06718 & 35 & 0.0671764 \\
+39.90663 & 40 & 0.0933651 \\
 \bottomrule()
 \end{longtable}
 
@@ -458,7 +458,7 @@ predicted & reales & RSE \\
 \end{Shaded}
 
 \begin{verbatim}
-## [1] 0.5274737
+## [1] 0.440808
 \end{verbatim}
 
 \hypertarget{adquisiciuxf3n-de-datos}{%
@@ -655,15 +655,15 @@ dataset en el 70\% para entrenamiento y el 30\% para prueba
 ## 
 ##           Reference
 ## Prediction CONCAVA CONVEXA PLANA
-##    CONCAVA      19       0     0
-##    CONVEXA       0      18     0
-##    PLANA         0       0    23
+##    CONCAVA      22       0     0
+##    CONVEXA       0      20     0
+##    PLANA         0       0    18
 ## 
 ## Overall Statistics
 ##                                      
 ##                Accuracy : 1          
 ##                  95% CI : (0.9404, 1)
-##     No Information Rate : 0.3833     
+##     No Information Rate : 0.3667     
 ##     P-Value [Acc > NIR] : < 2.2e-16  
 ##                                      
 ##                   Kappa : 1          
@@ -673,14 +673,14 @@ dataset en el 70\% para entrenamiento y el 30\% para prueba
 ## Statistics by Class:
 ## 
 ##                      Class: CONCAVA Class: CONVEXA Class: PLANA
-## Sensitivity                  1.0000            1.0       1.0000
-## Specificity                  1.0000            1.0       1.0000
-## Pos Pred Value               1.0000            1.0       1.0000
-## Neg Pred Value               1.0000            1.0       1.0000
-## Prevalence                   0.3167            0.3       0.3833
-## Detection Rate               0.3167            0.3       0.3833
-## Detection Prevalence         0.3167            0.3       0.3833
-## Balanced Accuracy            1.0000            1.0       1.0000
+## Sensitivity                  1.0000         1.0000          1.0
+## Specificity                  1.0000         1.0000          1.0
+## Pos Pred Value               1.0000         1.0000          1.0
+## Neg Pred Value               1.0000         1.0000          1.0
+## Prevalence                   0.3667         0.3333          0.3
+## Detection Rate               0.3667         0.3333          0.3
+## Detection Prevalence         0.3667         0.3333          0.3
+## Balanced Accuracy            1.0000         1.0000          1.0
 \end{verbatim}
 
 Se entrena el algoritmo Knn en funcion de la variable TYPE y las
@@ -703,11 +703,11 @@ de igual manera se ve la sensitividad y la especificidad son del 1.
 \begin{verbatim}
 ##  [1] PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA  
 ## [10] PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA   PLANA  
-## [19] PLANA   PLANA   PLANA   PLANA   PLANA   CONVEXA CONCAVA CONVEXA CONVEXA
-## [28] CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA CONCAVA CONCAVA CONVEXA
-## [37] CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA CONCAVA CONVEXA CONVEXA
-## [46] CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA CONVEXA CONVEXA CONVEXA
-## [55] CONCAVA CONCAVA CONVEXA CONVEXA CONVEXA CONCAVA
+## [19] CONVEXA CONVEXA CONVEXA CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA
+## [28] CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA CONCAVA CONVEXA CONCAVA
+## [37] CONCAVA CONCAVA CONCAVA CONCAVA CONVEXA CONVEXA CONVEXA CONCAVA CONVEXA
+## [46] CONVEXA CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONVEXA CONVEXA CONVEXA
+## [55] CONVEXA CONVEXA CONCAVA CONCAVA CONCAVA CONCAVA
 ## Levels: CONCAVA CONVEXA PLANA
 \end{verbatim}
 
