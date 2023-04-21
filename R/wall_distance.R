@@ -11,8 +11,8 @@ head(wall.distance)
 
 summary(wall.distance)
 
-hist(wall.distance$INFRARED,breaks = 110)
-hist(wall.distance$ULTRASONIC,breaks = 110)
+hist(wall.distance$INFRARED,breaks = 10)
+hist(wall.distance$ULTRASONIC,breaks = 10)
 
 wall.distance$`DISTANCE(cm)` <-as.factor(wall.distance$`DISTANCE(cm)`)
 pairs(wall.distance[c("INFRARED","ULTRASONIC")]
@@ -26,7 +26,7 @@ x <- wall.distance$INFRARED
 y <- wall.distance$`DISTANCE(cm)`
 b=cov(x,y)/var(x)
 a=mean(y)-b*mean(x)
-a+b*121
+a+b*121 ## aca va el nuevo dataset
 
 
 ##Linear Regression For Ultrasonic Sensor
@@ -34,4 +34,4 @@ x <- wall.distance$ULTRASONIC
 y <- wall.distance$`DISTANCE(cm)`
 b=cov(x,y)/var(x)
 a=mean(y)-b*mean(x)
-a+b*126
+a+b*550## aca va el nuevo dataset

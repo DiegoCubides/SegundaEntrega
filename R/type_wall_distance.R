@@ -2,7 +2,7 @@ library(tidyverse)
 library(caret)
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
-
+datasetprueba <-read_csv(paste0(folder,"/type_wall_distance_prueba.csv"))
 #Exploratory Data Analysis
 head(type.wall.distance)
 hist(type.wall.distance$INFRARED,breaks = 50)
@@ -45,7 +45,7 @@ Knnfit <- train(TYPE ~ INFRARED+ULTRASONIC+TYPE.CONCAVA+TYPE.CONVEXA+TYPE.PLANA
                 ,preProcess= c("range")
                 ,tuneLength=20)
 
-Knnpredict <- predict(Knnfit,newdata = test.data)
+Knnpredict <- predict(Knnfit,newdata = test.data)## aca va el nuevo dataset
 
 confusionMatrix(Knnpredict
                 ,test.data$TYPE)

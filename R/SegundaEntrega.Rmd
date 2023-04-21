@@ -19,6 +19,7 @@ wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 dataset <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
+
 ```
 
 ## Introducción
@@ -103,16 +104,16 @@ hist(wall.distance$ULTRASONIC,breaks = 10)
 ```
 Debido a que la variable predictora es la distancia se tiene que pasar como factor,Graficando cada dato del sensor con la función hist se puede ver que los datos están distribuidos y que son viables para hacer aprendizaje de maquina
 ```{r include=TRUE, echo=TRUE, eval=TRUE, warning=FALSE}
-wall.distance$`DISTANCE(cm)` <-as.factor(wall.distance$`DISTANCE(cm)`)
+wall.distance2$`DISTANCE(cm)` <-as.factor(wall.distance2$`DISTANCE(cm)`)
 pairs(wall.distance[c("INFRARED","ULTRASONIC")]
 ,pch=25
-,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance$`DISTANCE(cm)`)])
+,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance2$`DISTANCE(cm)`)])
 
 ```
 Cuando se captaron los datos se identificó que un sensor crece inversamente al otro, graficando todos los datos en función a la distancia se notó que tienen una buena distribución y que se logran identificar grupos en todos los datos
 ```{r}
-pairs.panels(wall.distance[c("INFRARED","ULTRASONIC")]
-             ,pch=21,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance$`DISTANCE(cm)`)])
+pairs.panels(wall.distance2[c("INFRARED","ULTRASONIC")]
+             ,pch=21,bg=c("green","blue3","gray","yellow","green3","pink","brown","black","red","orange")[unclass(wall.distance2$`DISTANCE(cm)`)])
 ```
 En esta grafica se ve mejor la relacion de las varibales y se ve que tiene una relacion negativa de -0.9, siendo esto un factor muy importante para poder hacer el aprendizaje de maquina 
 
@@ -120,7 +121,7 @@ En esta grafica se ve mejor la relacion de las varibales y se ve que tiene una r
 kable(prop.table(table(wall.distance$`DISTANCE(cm)`)))
 ```
 de los 110 datos que se obtuvieron hay la misma cantidad en cada distancia identificada
-- regresion lineal para sensor infrarojo
+-regresion lineal para sensor infrarojo
 ```{r}
 
 x <- dataset$INFRARED
@@ -131,7 +132,41 @@ a+b*121
 ```
 - regresion lineal para sensor infrarojo
 
-#2.1 Adquisición de datos 
+- Regresion Multilineal
+Para la regresion multilineal se van a tener dos predictores los cuales son los datos del infrarojo y del ultrasonico, se hace cross validation con el dataset dividiendlo en un 70% para entramiento y un 30% para prueba
+```{r include=TRUE}
+predictors <- c( "INFRARED", "ULTRASONIC")
+sample.index <- sample(1:nrow(wall.distance)
+                       ,nrow(wall.distance)*0.7
+                       ,replace = F)
+train.data  <-  wall.distance[sample.index
+                                   ,c(predictors,"DISTANCE(cm)")
+                                   ,drop=F]
+test.data  <-  wall.distance[-sample.index
+                                  ,c(predictors,"DISTANCE(cm)")
+                                  ,drop=F]
+```
+Con la funcion lm se hace el modelo en funcion a la distancia y los datos con los que se va a entrenar son los del train.data
+
+```{r eval=TRUE}
+model<- lm(`DISTANCE(cm)` ~ INFRARED + ULTRASONIC,train.data)
+summary(model)
+predictions <- predict(model,test.data)
+predictions
+```
+Para el caso del modelo multilineal se logra identificar que la variable que mas tiene relevancia en el entrenamiento es la de ULTRASOINIC, de los 33 datos que se tenian para hacer el test de prueba el modelo predijo correctamente las distancias de todos, para ver el error cuadratico medio se hizo lo siguiente 
+
+```{r}
+RMSE.df <- data.frame(predicted = predictions
+                      ,reales=test.data$`DISTANCE(cm)`
+                      ,RSE = sqrt((predictions - test.data$`DISTANCE(cm)`)^2))
+promedio_error <- sum(RMSE.df$RSE)/nrow(RMSE.df )
+kable(head(RMSE.df))
+promedio_error
+
+```
+
+# 2.1 Adquisición de datos 
 Para el modelo multilineal se obtuvieron nuevas medidas y una nueva variable la cual es el tipo de obstaculo, de las 4 variables se obtuvieron 198 muestras.
 ```{r}
 kable(head(type.wall.distance))
@@ -206,4 +241,5 @@ de igual manera se ve la sensitividad y la especificidad son del 1.
 ```{r}
 Knnpredict
 ```
-## 2.2 Validacion de modelo
+##  Validacion de modelos
+Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos rango fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
