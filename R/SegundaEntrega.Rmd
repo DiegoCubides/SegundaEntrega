@@ -19,7 +19,7 @@ wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 dataset <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 type.wall.distance <-read_csv(paste0(folder,"/dataset_type_wall_distance.csv"))
-
+##
 ```
 
 ## Introducción
@@ -272,11 +272,16 @@ de igual manera se ve la sensitividad y la especificidad son del 1.
 ```{r}
 Knnpredict
 ```
+<<<<<<< HEAD
 
 ## Validacion de modelos
 
 Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos rango fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
 
+=======
+##  Validacion de modelos
+Para la validacion de modelos tomamos muestras desde distancias mas grandes de las que utilizamos para la creacion del modelo, en otras palabras utilizamos distancias fuera de los rangos de entrenamiento, para de esta manera comprobar la validez de los modelos creados. En este nuevo data set de validacion utilizamos rangos de distancia de los 70 a los 90 centimetros.
+>>>>>>> 480113853995acc4017db175efc4118a6aaf1886
 ```{r}
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
@@ -303,6 +308,7 @@ a+b* 240
 a+b* 261
 a+b* 276
 a+b* 291
+<<<<<<< HEAD
 ```
 
 Validacion de modelos
@@ -320,11 +326,47 @@ a+b\* 218 [1] 64.71935 \> a+b\* 240 [1] 71.38548 \> a+b\* 261 [1] 77.7486 \> a+b
 ## Reentrenamiento con un dataset de pruebas (data_pruebas)
 
 ```{r}
+=======
+
+```
+Se evidencia en los resultados que en el sensor infrarojo fuera de rango pierde la exactitud y precision; y el sensor de ultasonido mantiene su exactitud y precision sin importar que esta por fuera del rango del modelo predictorio.
+
+Regresion lineal para el sensor Infrarojo, fuera del rango.
+
+> a+b* 212
+[1] 34.35579
+> a+b* 223
+[1] 32.77144
+> a+b* 231
+[1] 31.61918
+> a+b* 235
+[1] 31.04306
+> a+b* 247
+[1] 29.31468
+
+Regresion lineal para el sensor de Ultrasonido, fuera del rango.
+
+a+b* 218
+[1] 64.71935
+> a+b* 240
+[1] 71.38548
+> a+b* 261
+[1] 77.7486
+> a+b* 276
+[1] 82.29368
+> a+b* 291
+[1] 86.83877
+```
+```{r}
+##reentrenamiento con un dataset de pruebas (data_pruebas)
+
+>>>>>>> 480113853995acc4017db175efc4118a6aaf1886
 folder <-  dirname(rstudioapi::getSourceEditorContext()$path )
 wall.distance <-read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 wall.distance2 <- read_csv(paste0(folder,"/dataset_wall_distance.csv"))
 data_prueba <- read_csv(paste0(folder,"/DATASET_PRUEBA_LINEAL.csv"))
 ```
+<<<<<<< HEAD
 
 ## Se hace un reentrenamiento
 
@@ -335,3 +377,14 @@ inplementando un nuevo dataset con los valores de distancia entre 65 y 85 para m
       10 
 
 86.39164
+=======
+## se hace un rentrenamiento 
+inplementando un nuevo dataset con los valores de distancia entre 65 y 85 para mirar el comportamiento de la regrecion multilineal con respecto a las funciones de prediccion  el modelo. de esta forma los resultados odtenidos estuvieron  semejantes entre el dataset y la prediccion
+
+##resultados de prediccion datos y del dataset del 65 a 85
+ 1        2        3        4        5        6        7        8        9 
+64.28071 70.82564 77.07798 81.54730 86.00092 66.43089 70.28756 75.94490 80.73429
+
+      10 
+86.39164 
+>>>>>>> 480113853995acc4017db175efc4118a6aaf1886
